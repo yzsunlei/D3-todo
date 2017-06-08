@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>testD3-5-dataPower.html</title>
+<script type="text/javascript" src="d3.js"></script>
+<style type="text/css">
+
+div.bar {
+    display: inline-block;
+    width: 20px;
+    margin-right: 2px;
+    background-color: teal;
+}
+
+</style>
+</head>
+<body>
+<p>使用随机数值，有问题，需要看一下</p>
+<script type="text/javascript">
+
+// 使用原生js方式
+//var dataset = [];
+//for (var i = 0; i < 25; i++) {
+//    var newNumber = Math.round(Math.random() * 30);  //随机生成0-30的整数
+//    dataset.push(newNumber);
+//}
+
+// 使用d3方式
+var dataset = d3.range(25).map(function(){
+    return d3.round(d3.random.normal(15,8)(),1);
+})
+
+d3.select("body").selectAll("div")
+    .data(dataset)
+    .enter()
+    .append("div")
+    .attr("class", "bar")
+    .style("height", function(d) {
+        return (d * 5) + "px";
+    });
+
+</script>
+</body>
+</html>
