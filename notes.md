@@ -4,3 +4,4 @@
 * 最常用的是数组、JSON，特殊的有CSV、GeoJSON等
 
 * D3经典的E-N-E编程套路?
+* D3经典的select-data-enter-append-attr/style的编程套路？
