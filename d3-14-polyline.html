@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <meta charset="utf-8">
+        <title>testD3-14-polyline.html</title>
+        <script type="text/javascript" src="d3.v3.js"></script>
+    <style type="text/css">
+    </style>
+    </head>
+    <body>
+    <h2>svg绘制折线</h2>
+        <script type="text/javascript">
+// 在 body 中插入一個 svg
+var svg = d3.select('body').append('svg');
+
+
+// 在 svg 中插入 polyline
+svg.append('polyline').attr({
+    points: '100,10 40,180 190,60 10,60 160,180 100,10'
+}).style({
+    fill: 'black',
+    stroke: 'green',
+    'stroke-width': 4
+});
+
+// 在 svg 中插入 polyline
+svg.append('polyline').attr({
+    points: '200,160 240,160 240,120 280,120 280,80 320,80 320,40 360,40 360,160 240,160'
+}).style({
+    fill: 'none',
+    stroke: 'green',
+    'stroke-width': 4
+});
+        </script>
+    </body>
+</html>
