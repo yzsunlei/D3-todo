@@ -1,15 +1,19 @@
 !function() {
-  // 主对象
+  // 主对象 版本3.5.7
   var d3 = {
     version: "3.5.17"
   };
+  // 数组分割函数，不会修改原数组
   var d3_arraySlice = [].slice, d3_array = function(list) {
     return d3_arraySlice.call(list);
   };
+  // 当前的文档DOM ？用途
   var d3_document = this.document;
+  // 通过一个标签获取所属的文档DOM
   function d3_documentElement(node) {
     return node && (node.ownerDocument || node.document || node).documentElement;
   }
+  // 通过一个标签获取所属文档的window对象
   function d3_window(node) {
     return node && (node.ownerDocument && node.ownerDocument.defaultView || node.document && node || node.defaultView);
   }
@@ -24,6 +28,7 @@
       };
     }
   }
+  // Date.now获取当前时间戳，在早于 Internet Explorer 9 的安装版本中不受支持
   if (!Date.now) Date.now = function() {
     return +new Date();
   };
@@ -43,10 +48,13 @@
       };
     }
   }
+  // 定义升序比较函数
   d3.ascending = d3_ascending;
+  // 升序比较函数
   function d3_ascending(a, b) {
     return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
   }
+  // 降序比较函数
   d3.descending = function(a, b) {
     return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
   };
@@ -107,12 +115,15 @@
     }
     return [ a, c ];
   };
+  // 变量强制转换成数字函数， +null == 0，剔除
   function d3_number(x) {
     return x === null ? NaN : +x;
   }
+  // 判断是否是NaN值
   function d3_numeric(x) {
     return !isNaN(x);
   }
+  // 数组求和函数，可以传入函数f对数组的每一项进行预处理
   d3.sum = function(array, f) {
     var s = 0, n = array.length, a, i = -1;
     if (arguments.length === 1) {
@@ -122,6 +133,7 @@
     }
     return s;
   };
+  // 求平均数函数，可以传入函数f对数组的每一项进行预处理
   d3.mean = function(array, f) {
     var s = 0, n = array.length, a, i = -1, j = n;
     if (arguments.length === 1) {
@@ -131,10 +143,12 @@
     }
     if (j) return s / j;
   };
+  // 求分位数函数，这个概念不懂
   d3.quantile = function(values, p) {
     var H = (values.length - 1) * p + 1, h = Math.floor(H), v = +values[h - 1], e = H - h;
     return e ? v + e * (values[h] - v) : v;
   };
+  // 求中值函数
   d3.median = function(array, f) {
     var numbers = [], n = array.length, a, i = -1;
     if (arguments.length === 1) {
@@ -142,8 +156,10 @@
     } else {
       while (++i < n) if (d3_numeric(a = d3_number(f.call(array, array[i], i)))) numbers.push(a);
     }
+    // 这里不太懂
     if (numbers.length) return d3.quantile(numbers.sort(d3_ascending), .5);
   };
+  // 求方差函数，计算公式不太懂
   d3.variance = function(array, f) {
     var n = array.length, m = 0, a, d, s = 0, i = -1, j = 0;
     if (arguments.length === 1) {
@@ -165,10 +181,12 @@
     }
     if (j > 1) return s / (j - 1);
   };
+  // 标准差，方差开根号
   d3.deviation = function() {
     var v = d3.variance.apply(this, arguments);
     return v ? Math.sqrt(v) : v;
   };
+  // 按照排序插入，比较复杂
   function d3_bisector(compare) {
     return {
       left: function(a, x, lo, hi) {
