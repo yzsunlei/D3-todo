@@ -7,4 +7,3 @@
 * D3经典的select-data-enter-append-attr/style的编程套路？
 * 'M50 150Q300 50 300 150T450 150',路径的参数？
 * 音乐的音符转换成跳跃的柱状图
-* 
